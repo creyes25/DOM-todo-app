@@ -20,8 +20,16 @@ body {
 
 .task-creation {
   border: 1px solid black;
+  border-radius: 15px;
   width: 500px;
   height: 30px;
-  padding: 5px;
+  padding: 10px;
   justify-content: space-between;
+}
+
+.input, .input:focus {
+  width: 75%;
+  border: none;
+  outline: none;
+  font-size: 1.2em;
 }
