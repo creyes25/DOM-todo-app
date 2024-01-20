@@ -8,20 +8,18 @@ function addToActiveList (taskValue) {
   const taskCont = document.createElement('div')
   const taskCheckbox = document.createElement('input')
   const task = document.createElement('span')
-  const deleteBtnCont = document.createElement('div')
-  // const deleteBtn = document.createElement('button')
-
+  const deleteBtn = document.createElement('div')
 
   taskCont.classList.add('task-cont', 'flex')
   taskCheckbox.setAttribute('type', 'checkbox')
   taskCheckbox.classList.add('checkbox')
   task.innerHTML = taskValue
-  deleteBtnCont.classList.add('delete-containter')
-  deleteBtnCont.innerText = '🗑️'
+  deleteBtn.classList.add('delete-btn')
+  deleteBtn.innerText = '🗑️'
 
   taskCont.appendChild(taskCheckbox)
   taskCont.appendChild(task)
-  taskCont.appendChild(deleteBtnCont)
+  taskCont.appendChild(deleteBtn)
   activeList.appendChild(taskCont)
 }
 
@@ -43,6 +41,8 @@ addBtn.addEventListener('click', () => {
 
 taskList.addEventListener('click', (e) => {
   const checkboxes = document.querySelectorAll("input[type=checkbox]")
+  const deleteBtns = document.querySelectorAll('.delete-btn')
+
   checkboxes.forEach(checkbox => {
     if(checkbox.contains(e.target)) {
       const taskContainer = checkbox.parentNode
@@ -54,5 +54,13 @@ taskList.addEventListener('click', (e) => {
       }
     }
   })
+
+  deleteBtns.forEach(delBtn => {
+    if(delBtn.contains(e.target)) {
+      const taskContainer = delBtn.parentNode
+      taskContainer.remove()
+    }
+  })
+
 })
 
