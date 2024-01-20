@@ -4,13 +4,6 @@ const taskList = document.querySelector('.task-list')
 const activeList = document.querySelector('.active-list')
 const completedList = document.querySelector('.completed-list')
 
-
-
-
-
-
-const tasksActiveList = []
-
 function addToActiveList (taskValue) {
   const activeDiv = document.createElement('div')
   const newTask = document.createElement('input')
