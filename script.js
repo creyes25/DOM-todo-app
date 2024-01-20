@@ -67,6 +67,10 @@ taskList.addEventListener('click', (e) => {
 
 
 reset.addEventListener('click', () => {
+  const activeTitle = activeList.firstElementChild
+  const completedTitle = completedList.firstElementChild
   activeList.innerText = ''
   completedList.innerHTML = ''
+  activeList.appendChild(activeTitle)
+  completedList.appendChild(completedTitle)
 })
