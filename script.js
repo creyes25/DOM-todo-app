@@ -3,6 +3,7 @@ const addBtn = document.querySelector('.add')
 const taskList = document.querySelector('.task-list')
 const activeList = document.querySelector('.active-list')
 const completedList = document.querySelector('.completed-list')
+const reset = document.querySelector('.reset')
 
 function addToActiveList (taskValue) {
   const taskCont = document.createElement('div')
@@ -64,3 +65,8 @@ taskList.addEventListener('click', (e) => {
 
 })
 
+
+reset.addEventListener('click', () => {
+  activeList.innerText = ''
+  completedList.innerHTML = ''
+})
