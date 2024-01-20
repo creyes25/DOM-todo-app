@@ -51,3 +51,15 @@ activeList.addEventListener('click', (e) => {
     }
   })
 })
+
+completedList.addEventListener('click', (e) => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]")
+  checkboxes.forEach(checkbox => {
+    if(checkbox.contains(e.target)) {
+      if(!checkbox.checked) {
+        const taskContainer = checkbox.parentNode
+        activeList.appendChild(taskContainer)
+      }
+    }
+  })
+})
