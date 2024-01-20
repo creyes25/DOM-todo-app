@@ -5,18 +5,24 @@ const activeList = document.querySelector('.active-list')
 const completedList = document.querySelector('.completed-list')
 
 function addToActiveList (taskValue) {
-  const activeDiv = document.createElement('div')
-  const newTask = document.createElement('input')
-  const span = document.createElement('span')
-  
-  activeDiv.classList.add('task-cont')
-  newTask.setAttribute('type', 'checkbox')
-  span.classList.add('task')
-  span.innerHTML = taskValue
+  const taskCont = document.createElement('div')
+  const taskCheckbox = document.createElement('input')
+  const task = document.createElement('span')
+  const deleteBtnCont = document.createElement('div')
+  // const deleteBtn = document.createElement('button')
 
-  activeDiv.appendChild(newTask)
-  activeDiv.appendChild(span)
-  activeList.appendChild(activeDiv)
+
+  taskCont.classList.add('task-cont', 'flex')
+  taskCheckbox.setAttribute('type', 'checkbox')
+  taskCheckbox.classList.add('checkbox')
+  task.innerHTML = taskValue
+  deleteBtnCont.classList.add('delete-containter')
+  deleteBtnCont.innerText = '🗑️'
+
+  taskCont.appendChild(taskCheckbox)
+  taskCont.appendChild(task)
+  taskCont.appendChild(deleteBtnCont)
+  activeList.appendChild(taskCont)
 }
 
 
