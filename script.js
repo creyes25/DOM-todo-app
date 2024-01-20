@@ -14,8 +14,9 @@ function addToActiveList (taskValue) {
   const newTask = document.createElement('input')
   const span = document.createElement('span')
   
-  activeDiv.classList.add('task')
+  activeDiv.classList.add('task-cont')
   newTask.setAttribute('type', 'checkbox')
+  span.classList.add('task')
   span.innerHTML = taskValue
 
   activeDiv.appendChild(newTask)
@@ -39,3 +40,14 @@ addBtn.addEventListener('click', () => {
   inputText.value = ''
 })
 
+activeList.addEventListener('click', (e) => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]")
+  checkboxes.forEach(checkbox => {
+    if(checkbox.contains(e.target)) {
+      if(checkbox.checked) {
+        const taskContainer = checkbox.parentNode
+        completedList.appendChild(taskContainer)
+      }
+    }
+  })
+})
