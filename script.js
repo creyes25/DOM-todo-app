@@ -1,7 +1,9 @@
 const inputText = document.querySelector('.input') 
 const addBtn = document.querySelector('.add')
+const taskList = document.querySelector('.task-list')
 const activeList = document.querySelector('.active-list')
 const completedList = document.querySelector('.completed-list')
+
 
 
 
@@ -40,26 +42,18 @@ addBtn.addEventListener('click', () => {
   inputText.value = ''
 })
 
-activeList.addEventListener('click', (e) => {
+taskList.addEventListener('click', (e) => {
   const checkboxes = document.querySelectorAll("input[type=checkbox]")
   checkboxes.forEach(checkbox => {
     if(checkbox.contains(e.target)) {
-      if(checkbox.checked) {
-        const taskContainer = checkbox.parentNode
-        completedList.appendChild(taskContainer)
-      }
-    }
-  })
-})
+      const taskContainer = checkbox.parentNode
 
-completedList.addEventListener('click', (e) => {
-  const checkboxes = document.querySelectorAll("input[type=checkbox]")
-  checkboxes.forEach(checkbox => {
-    if(checkbox.contains(e.target)) {
-      if(!checkbox.checked) {
-        const taskContainer = checkbox.parentNode
+      if(checkbox.checked) {
+        completedList.appendChild(taskContainer)
+      }else {
         activeList.appendChild(taskContainer)
       }
     }
   })
 })
+
