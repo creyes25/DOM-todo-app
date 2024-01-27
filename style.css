@@ -73,11 +73,9 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 
 .task-cont {
   align-items: center;
+  justify-content: space-between;
+  gap: 5em;
   font-size: 1.2em;
-}
-
-.checkbox {
-  margin-right: 13px;
 }
 
 input[type="checkbox"] {
@@ -87,4 +85,14 @@ input[type="checkbox"] {
   cursor: pointer;
   outline: none;
   accent-color: #8083e3;
+}
+
+.left {
+  align-items: center;
+  gap: 8px;
+}
+
+.right {
+  align-items: center;
+  gap: 8px;
 }
