@@ -94,7 +94,8 @@ taskList.addEventListener('click', (e) => {
 
   checkboxes.forEach(checkbox => {
     if(checkbox.contains(e.target)) {
-      const taskContainer = checkbox.parentNode
+      const taskContainer = checkbox.parentNode.parentNode
+      
 
       if(checkbox.checked) {
         completedList.appendChild(taskContainer)
@@ -106,7 +107,7 @@ taskList.addEventListener('click', (e) => {
 
   deleteBtns.forEach(delBtn => {
     if(delBtn.contains(e.target)) {
-      const taskContainer = delBtn.parentNode
+      const taskContainer = delBtn.parentNode.parentNode
       taskContainer.remove()
     }
   })
