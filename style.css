@@ -17,14 +17,19 @@ body {
   font-size: 3em;
 }
 
+button {
+  cursor: pointer;
+}
+
 
 .task-creation {
-  border: 1px solid black;
   border-radius: 15px;
-  width: 500px;
-  height: 30px;
+  width: 550px;
+  height: 35px;
   padding: 10px;
   justify-content: space-between;
+  background-color: #5a5a5a;
+  margin: 20px 0 30px;
 }
 
 .input, .input:focus {
@@ -32,4 +37,37 @@ body {
   border: none;
   outline: none;
   font-size: 1.2em;
+  background-color: #5a5a5a;
+  color: white;
 }
+
+.task-info {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.time-due {
+  color: white;
+  background-color: black;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  padding: 5px;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(1);
+  font-size: larger;
+}
+
+.add {
+  background-color: black;
+  color: white;
+  padding: 5px;
+  width: 55px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
