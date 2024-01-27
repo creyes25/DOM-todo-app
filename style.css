@@ -71,3 +71,20 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   font-size: 1em;
 }
 
+.task-cont {
+  align-items: center;
+  font-size: 1.2em;
+}
+
+.checkbox {
+  margin-right: 13px;
+}
+
+input[type="checkbox"] {
+  height: 22px;
+  width: 22px;
+  border-radius: 100%;
+  cursor: pointer;
+  outline: none;
+  accent-color: #8083e3;
+}
