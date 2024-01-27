@@ -37,6 +37,8 @@ function addToActiveList (taskValue, setTime) {
   const taskCheckbox = document.createElement('input')
   const task = document.createElement('span')
   const deleteBtn = document.createElement('div')
+  const leftDiv = document.createElement('div')
+  const rightDiv = document.createElement('div')
 
   taskCont.classList.add('task-cont', 'flex')
   taskCheckbox.setAttribute('type', 'checkbox')
@@ -45,19 +47,25 @@ function addToActiveList (taskValue, setTime) {
   task.innerHTML = taskValue
   deleteBtn.classList.add('delete-btn')
   deleteBtn.innerText = '🗑️'
+  leftDiv.classList.add('left', 'flex')
+  rightDiv.classList.add('right', 'flex')
 
-  taskCont.appendChild(taskCheckbox)
-  taskCont.appendChild(task)
+
+  taskCont.appendChild(leftDiv)
+  taskCont.appendChild(rightDiv)
+
+  leftDiv.appendChild(taskCheckbox)
+  leftDiv.appendChild(task)
   activeList.appendChild(taskCont)
 
   if (setTime !== undefined) {
-    const time = document.createElement('span')
+    const time = document.createElement('div')
     time.classList.add('time')
     time.innerHTML = setTime
-    taskCont.appendChild(time)
+    rightDiv.appendChild(time)
   }
 
-  taskCont.appendChild(deleteBtn)
+  rightDiv.appendChild(deleteBtn)
 }
 
 
