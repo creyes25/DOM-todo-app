@@ -71,12 +71,18 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   font-size: 1em;
 }
 
+.section-title {
+  text-align: center;
+}
+
 .task-cont {
   align-items: center;
   justify-content: space-between;
   gap: 5em;
   font-size: 1.2em;
 }
+
+
 
 input[type="checkbox"] {
   height: 22px;
@@ -96,3 +102,5 @@ input[type="checkbox"] {
   align-items: center;
   gap: 8px;
 }
+
+
