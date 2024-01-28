@@ -2,6 +2,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #181717;
+  color: rgb(255, 255, 255);
 }
 
 .flex {
@@ -15,6 +17,7 @@ body {
 .title {
   margin: 5% auto 2%;
   font-size: 3em;
+  color: #8083e3;
 }
 
 button {
@@ -48,7 +51,7 @@ button {
 
 .time-due {
   color: white;
-  background-color: black;
+  background-color: #151515;
   border: none;
   border-radius: 5px;
   font-size: 1em;
@@ -62,7 +65,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 .add {
-  background-color: black;
+  background-color: #151515;;
   color: white;
   padding: 5px;
   width: 55px;
@@ -71,8 +74,14 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   font-size: 1em;
 }
 
+
+.completed-list {
+  margin-top: 4.5em;
+}
+
 .section-title {
   text-align: center;
+  font-size: 1.8em;
 }
 
 .task-cont {
@@ -80,8 +89,12 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   justify-content: space-between;
   gap: 5em;
   font-size: 1.2em;
+  margin-bottom: 15px;
 }
 
+.task-cont:last-child {
+  margin-bottom: 0;
+}
 
 
 input[type="checkbox"] {
@@ -96,6 +109,7 @@ input[type="checkbox"] {
 .left {
   align-items: center;
   gap: 8px;
+  color: rgba(255, 255, 255, 0.808);
 }
 
 .right {
@@ -103,4 +117,20 @@ input[type="checkbox"] {
   gap: 8px;
 }
 
+.delete-btn {
+  cursor: pointer;
+  color: transparent;
+  text-shadow: 0 0 0 #F05051;
+  font-size: 20px;
+}
+
+.reset {
+  background-color: #5a5a5a;
+  color: rgba(255, 255, 255, 0.822);
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  margin-top: 5em;
+}
 

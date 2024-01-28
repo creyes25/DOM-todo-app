@@ -66,6 +66,7 @@ function addToActiveList (taskValue, setTime) {
   }
 
   rightDiv.appendChild(deleteBtn)
+
 }
 
 
@@ -91,6 +92,7 @@ addBtn.addEventListener('click', () => {
 taskList.addEventListener('click', (e) => {
   const checkboxes = document.querySelectorAll("input[type=checkbox]")
   const deleteBtns = document.querySelectorAll('.delete-btn')
+  const tasks = document.querySelectorAll('.task')
 
   checkboxes.forEach(checkbox => {
     if(checkbox.contains(e.target)) {
@@ -112,6 +114,18 @@ taskList.addEventListener('click', (e) => {
     }
   })
 
+
+})
+
+taskList.addEventListener('dblclick', (e) => {
+  const tasks = document.querySelectorAll('.task')
+
+    tasks.forEach(task => {
+    if(task.contains(e.target)) {
+      editedTask = prompt('Edit Task:', task.innerHTML)
+      task.innerHTML = editedTask
+    }
+  })
 })
 
 
