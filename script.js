@@ -31,8 +31,7 @@ function getTime() {
 }
 
 
-function addToActiveList (taskValue, setTime) {
-  
+function addToActiveList (taskValue, setTime) { 
   const taskCont = document.createElement('div')
   const taskCheckbox = document.createElement('input')
   const task = document.createElement('span')
@@ -50,7 +49,6 @@ function addToActiveList (taskValue, setTime) {
   leftDiv.classList.add('left', 'flex')
   rightDiv.classList.add('right', 'flex')
 
-
   taskCont.appendChild(leftDiv)
   taskCont.appendChild(rightDiv)
 
@@ -66,7 +64,6 @@ function addToActiveList (taskValue, setTime) {
   }
 
   rightDiv.appendChild(deleteBtn)
-
 }
 
 
@@ -113,8 +110,6 @@ taskList.addEventListener('click', (e) => {
       taskContainer.remove()
     }
   })
-
-
 })
 
 taskList.addEventListener('dblclick', (e) => {
@@ -128,7 +123,6 @@ taskList.addEventListener('dblclick', (e) => {
     }
   })
 })
-
 
 reset.addEventListener('click', () => {
   const activeTitle = activeList.firstElementChild
