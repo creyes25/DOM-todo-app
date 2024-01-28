@@ -123,6 +123,8 @@ taskList.addEventListener('dblclick', (e) => {
     tasks.forEach(task => {
     if(task.contains(e.target)) {
       editedTask = prompt('Edit Task:', task.innerHTML)
+      console.log(editedTask)
+      if(editedTask === task.innerHTML) return
       task.innerHTML = editedTask
     }
   })
