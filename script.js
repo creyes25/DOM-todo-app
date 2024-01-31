@@ -1,141 +1,199 @@
-const inputText = document.querySelector('.input') 
-const dueTime = document.querySelector('.time-due')
-const addBtn = document.querySelector('.add')
-const taskList = document.querySelector('.task-list')
-const activeList = document.querySelector('.active-list')
-const completedList = document.querySelector('.completed-list')
-const reset = document.querySelector('.reset')
+console.clear();
 
+const inputText = document.querySelector(".input");
+const dueTime = document.querySelector(".time-due");
+const addBtn = document.querySelector(".add");
+const taskListContainer = document.querySelector(".task-list-cont");
+const activeList = document.querySelector(".active-list");
+const completedList = document.querySelector(".completed-list");
+const reset = document.querySelector(".reset");
+
+let tasksList = [];
+
+function $(el, classList = [], id = null) {
+  const newElement = document.createElement(el);
+
+  if (classList.length !== 0) {
+    classList.forEach((className) => {
+      newElement.classList.add(className);
+    });
+  }
+
+  if (id !== null) {
+    newElement.id = id;
+  }
+
+  return newElement;
+}
+
+function createNewTask(taskName, timeDue) {
+  return {
+    taskName: inputText.value,
+    timeDue: timeDue,
+    isCompleted: false
+  };
+}
 
 function getTime() {
-  if(dueTime.value === '') return undefined
+  if (dueTime.value === "") return undefined;
 
-  const selectedTime = dueTime.value.split(':')
-  let hours = selectedTime[0]
-  let mins = selectedTime[1]
-  let meridiem
+  const selectedTime = dueTime.value.split(":");
+  let hours = selectedTime[0];
+  let mins = selectedTime[1];
+  let meridiem;
 
   if (hours > 12) {
-    meridiem = 'PM'
-    hours -= 12
-  }else {
-    meridiem = 'AM'
-    if (hours === '00') {
-      hours = 12
-    }else {
-      meridiem = 'PM'
+    meridiem = "PM";
+    hours -= 12;
+  } else {
+    meridiem = "AM";
+    if (hours === "00") {
+      hours = 12;
+    } else {
+      meridiem = "PM";
     }
   }
 
-  return `${hours}:${mins} ${meridiem}`
+  return `${hours}:${mins} ${meridiem}`;
 }
 
+function addTasksToList() {
+  const activeTitle = activeList.firstElementChild;
+  const completedTitle = completedList.firstElementChild;
+  activeList.innerHTML = "";
+  completedList.innerHTML = "";
+  activeList.appendChild(activeTitle);
+  completedList.appendChild(completedTitle);
 
-function addToActiveList (taskValue, setTime) { 
-  const taskCont = document.createElement('div')
-  const taskCheckbox = document.createElement('input')
-  const task = document.createElement('span')
-  const deleteBtn = document.createElement('div')
-  const leftDiv = document.createElement('div')
-  const rightDiv = document.createElement('div')
+  tasksList.forEach((task, idx) => {
+    task.id = idx;
 
-  taskCont.classList.add('task-cont', 'flex')
-  taskCheckbox.setAttribute('type', 'checkbox')
-  taskCheckbox.classList.add('checkbox')
-  task.classList.add('task')
-  task.innerHTML = taskValue
-  deleteBtn.classList.add('delete-btn')
-  deleteBtn.innerText = '🗑️'
-  leftDiv.classList.add('left', 'flex')
-  rightDiv.classList.add('right', 'flex')
+    const taskCont = $("div", ["task-cont", "flex"], idx);
+    const taskCheckbox = $("input", ["checkbox"]);
+    const taskInfo = $("span", ["task"]);
+    const deleteBtn = $("div", ["delete-btn"]);
+    const leftDiv = $("div", ["left", "flex"]);
+    const rightDiv = $("div", ["right", "flex"]);
+    const time = $("div", ["time"]);
 
-  taskCont.appendChild(leftDiv)
-  taskCont.appendChild(rightDiv)
+    taskCheckbox.setAttribute("type", "checkbox");
 
-  leftDiv.appendChild(taskCheckbox)
-  leftDiv.appendChild(task)
-  activeList.appendChild(taskCont)
+    if (task.timeDue !== undefined) {
+      time.innerHTML = task.timeDue;
+    }
 
-  if (setTime !== undefined) {
-    const time = document.createElement('div')
-    time.classList.add('time')
-    time.innerHTML = setTime
-    rightDiv.appendChild(time)
-  }
+    taskInfo.innerHTML = task.taskName;
+    deleteBtn.innerHTML = "🗑️";
 
-  rightDiv.appendChild(deleteBtn)
+    taskCont.appendChild(leftDiv);
+    taskCont.appendChild(rightDiv);
+    leftDiv.appendChild(taskCheckbox);
+    leftDiv.appendChild(taskInfo);
+    rightDiv.appendChild(time);
+    rightDiv.appendChild(deleteBtn);
+
+    if (!task.isCompleted) {
+      taskCheckbox.checked = false;
+      activeList.appendChild(taskCont);
+    } else {
+      taskCheckbox.checked = true;
+      completedList.appendChild(taskCont);
+    }
+  });
 }
 
-
-inputText.addEventListener('keydown', (e) => {
-  if(e.key === 'Enter') {
-    if(e.target.value === '') return
-    const timeDue = getTime()
-    addToActiveList(e.target.value, timeDue)
-    inputText.value = ''
-    dueTime.value = ''
+inputText.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    if (e.target.value === "") return;
+    const timeDue = getTime();
+    const newTask = createNewTask(e.target.value, timeDue);
+    tasksList.push(newTask);
+    inputText.value = "";
+    dueTime.value = "";
+    addTasksToList();
   }
+});
 
-})
+addBtn.addEventListener("click", () => {
+  if (inputText.value === "") return;
+  const timeDue = getTime();
+  const newTask = createNewTask(inputText.value, timeDue);
+  tasksList.push(newTask);
+  inputText.value = "";
+  dueTime.value = "";
+  addTasksToList();
+});
 
-addBtn.addEventListener('click', () => {
-  if(inputText.value === '') return
-  const timeDue = getTime()
-  addToActiveList(inputText.value, timeDue)
-  inputText.value = ''
-  dueTime.value = ''
-})
+taskListContainer.addEventListener("click", (e) => {
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  const deleteBtns = document.querySelectorAll(".delete-btn");
 
-taskList.addEventListener('click', (e) => {
-  const checkboxes = document.querySelectorAll("input[type=checkbox]")
-  const deleteBtns = document.querySelectorAll('.delete-btn')
-  const tasks = document.querySelectorAll('.task')
+  checkboxes.forEach((checkbox) => {
+    if (checkbox.contains(e.target)) {
+      const taskContainer = checkbox.parentNode.parentNode;
+      const taskCompleted = parseInt(taskContainer.getAttribute("id"));
+      let completed = false;
 
-  checkboxes.forEach(checkbox => {
-    if(checkbox.contains(e.target)) {
-      const taskContainer = checkbox.parentNode.parentNode
-      
-
-      if(checkbox.checked) {
-        completedList.appendChild(taskContainer)
-      }else {
-        activeList.appendChild(taskContainer)
-      }
+      tasksList.forEach((task) => {
+        if (task.id === taskCompleted) {
+          if (checkbox.checked) {
+            task.isCompleted = true;
+            addTasksToList();
+          } else {
+            task.isCompleted = false;
+            addTasksToList();
+          }
+        }
+      });
     }
-  })
+  });
 
-  deleteBtns.forEach(delBtn => {
-    if(delBtn.contains(e.target)) {
-      const taskContainer = delBtn.parentNode.parentNode
-      taskContainer.remove()
+  deleteBtns.forEach((delBtn) => {
+    if (delBtn.contains(e.target)) {
+      const taskContainer = delBtn.parentNode.parentNode;
+      const taskToDelete = parseInt(taskContainer.getAttribute("id"));
+      const updatedTasksList = [];
+      tasksList.map((task) => {
+        if (task.id !== taskToDelete) {
+          updatedTasksList.push(task);
+        }
+      });
+
+      tasksList.length = 0;
+      tasksList = [...updatedTasksList];
+
+      addTasksToList();
     }
-  })
-})
+  });
+});
 
-taskList.addEventListener('dblclick', (e) => {
-  const tasks = document.querySelectorAll('.task')
+taskListContainer.addEventListener("dblclick", (e) => {
+  const tasks = document.querySelectorAll(".task");
 
-    tasks.forEach(task => {
-    if(task.contains(e.target)) {
-      editedTask = prompt('Edit Task:', task.innerHTML)
+  tasks.forEach((task) => {
+    if (task.contains(e.target)) {
+      const taskCont = e.target.parentNode.parentNode.getAttribute("id");
 
-      if(editedTask === '') {
-        task.innerHTML = task.innerHTML
-      } else {
+      editedTask = prompt("Edit Task:", task.innerHTML);
 
-        task.innerHTML = editedTask
-      }
-
+      tasksList.forEach((task) => {
+        if (task.id === parseInt(taskCont)) {
+          if (editedTask === "") return;
+          task.taskName = editedTask;
+          addTasksToList();
+        }
+      });
     }
-  })
-})
+  });
+});
 
-reset.addEventListener('click', () => {
-  const activeTitle = activeList.firstElementChild
-  const completedTitle = completedList.firstElementChild
+reset.addEventListener("click", () => {
+  const activeTitle = activeList.firstElementChild;
+  const completedTitle = completedList.firstElementChild;
 
-  activeList.innerText = ''
-  completedList.innerHTML = ''
-  activeList.appendChild(activeTitle)
-  completedList.appendChild(completedTitle)
-})
+  activeList.innerText = "";
+  completedList.innerHTML = "";
+  activeList.appendChild(activeTitle);
+  completedList.appendChild(completedTitle);
+  tasksList.length = 0;
+});
